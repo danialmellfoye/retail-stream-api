@@ -55,7 +55,7 @@ def generate_event():
             "timestamp": datetime.datetime.utcnow().isoformat()
         }
         yield f""""data":{json.dumps(event)}\n\n"""
-        time.sleep(1)  # emit one event per second
+        time.sleep(5)  # emit one event per (n) second
 
 @app.get("/stream")
 def stream_data():
