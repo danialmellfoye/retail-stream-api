@@ -5,11 +5,11 @@ import json, time, random, uuid, datetime
 app = FastAPI()
 
 products = [
-    {"product_id": "P1001", "name": "Laptop"},
-    {"product_id": "P1002", "name": "Phone"},
-    {"product_id": "P1003", "name": "Keyboard"},
-    {"product_id": "P1004", "name": "Headphones"},
-    {"product_id": "P1005", "name": "Smartwatch"},
+    {"product_id": "P1001", "name": "Laptop", "price": 50000},
+    {"product_id": "P1002", "name": "Phone", "price": 25000},
+    {"product_id": "P1003", "name": "Keyboard", "price": 1000},
+    {"product_id": "P1004", "name": "Headphones", "price": 600},
+    {"product_id": "P1005", "name": "Smartwatch", "price": 1300},
 ]
 
 payment_types = ["CreditCard", "DebitCard", "Cash", "UPI"]
@@ -23,6 +23,7 @@ def generate_event():
     while True:
         product = random.choice(products)
         product_id = product["product_id"]
+        price = product["price"]
         event_type = random.choices(event_types, weights=[0.7, 0.1, 0.2])[0]  # mostly sales
         current_stock = stock[product_id]
 
@@ -50,7 +51,7 @@ def generate_event():
             "event_type": event_type,
             "quantity": quantity,
             "current_stock": stock[product_id],
-            "price": round(random.uniform(100, 2000), 2),
+            "priceperproduct": price,
             "payment_type": random.choice(payment_types),
             "timestamp": datetime.datetime.utcnow().isoformat()
         }
